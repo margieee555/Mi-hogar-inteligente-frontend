@@ -1,0 +1,61 @@
+<div class="bg-surface-container-lowest text-on-surface h-screen w-full flex flex-col md:flex-row overflow-hidden font-body-lg text-body-lg">
+
+  <!-- Content Section -->
+  <div class="w-full md:w-5/12 h-full flex flex-col justify-center px-md lg:px-xl py-xl md:py-0 order-2 md:order-1 z-10 bg-surface-container-lowest md:shadow-xl relative">
+    <div class="max-w-md mx-auto w-full flex flex-col h-full md:h-auto md:justify-center justify-between">
+      <div class="flex-1 flex flex-col justify-center">
+
+        <!-- Brand Logo -->
+        <div class="flex items-center gap-xs mb-xl">
+          <div class="w-10 h-10 rounded-xl bg-primary-container flex items-center justify-center text-on-primary-container shadow-md">
+            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+          </div>
+          <span class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary">Hogar360</span>
+        </div>
+
+        <!-- Slogan -->
+        <h1 class="font-headline-lg-mobile text-headline-lg-mobile md:font-display-lg md:text-display-lg text-on-background mb-md">
+          Todo tu hogar, organizado en un solo lugar.
+        </h1>
+        <p class="font-body-lg text-body-lg text-on-surface-variant mb-xl">
+          Descubre la tranquilidad de tener el control total. Gestiona finanzas, tareas e inventario con una elegancia y simplicidad sin precedentes.
+        </p>
+
+        <!-- Actions -->
+        <div class="flex flex-col gap-sm w-full mt-auto md:mt-0">
+          <button
+            routerLink="/auth/login"
+            class="w-full bg-primary-container text-on-primary-container font-label-caps text-label-caps py-sm px-md rounded-xl hover:bg-primary-fixed-variant transition-all duration-300 shadow-[0px_4px_20px_rgba(0,0,0,0.05)] hover:shadow-[0px_8px_30px_rgba(0,0,0,0.08)] flex items-center justify-center gap-xs group">
+            Iniciar sesión
+            <span class="material-symbols-outlined transition-transform group-hover:translate-x-1">arrow_forward</span>
+          </button>
+          <button
+            routerLink="/auth/register"
+            class="w-full bg-transparent border border-outline-variant text-primary font-label-caps text-label-caps py-sm px-md rounded-xl hover:bg-surface-container-low transition-colors duration-300 flex items-center justify-center">
+            Crear cuenta
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Image Section -->
+  <div class="w-full md:w-7/12 h-[397px] md:h-full relative order-1 md:order-2 bg-surface-container-low overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-transparent md:bg-gradient-to-l md:from-transparent md:via-transparent md:to-surface-container-lowest z-10 pointer-events-none opacity-80 md:opacity-100"></div>
+    <img
+      class="w-full h-full object-cover object-center transform scale-105 transition-transform duration-[10s] hover:scale-100"
+      alt="Sala de estar moderna y minimalista"
+      src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdZUYudQ19ZVn-j6O6JrqeOQN7RDXjbDdDRCG8PGbu-N3Y7n2g0ZDPB60Bd0CyCyrjGHav-r1BquHKO2Lpccx0nQ8FXWPjn67NnTw6dbmMOBcUDQo9FlNKL9XotTvaJn2ZzJdnCy1Ukt576E5m3VN5WAHWWEbTJitdkSgrwUXYE_zmAEvQWz8U1F0hPnXo9uNaj5ssc4P7YwidGl97PbpSC7StjtEHmG5MoaY6VxLqibyW8wYYCNnIpw" />
+
+    <!-- Subtle decorative element -->
+    <div class="absolute bottom-lg right-lg z-20 hidden md:flex items-center gap-sm bg-surface/80 backdrop-blur-md p-sm rounded-xl border border-outline-variant/30 shadow-[0px_8px_30px_rgba(0,0,0,0.08)]">
+      <div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container">
+        <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+      </div>
+      <div class="flex flex-col">
+        <span class="font-label-caps text-label-caps text-on-surface">Estado del hogar</span>
+        <span class="font-body-sm text-body-sm text-secondary-fixed-dim font-medium">100% Organizado</span>
+      </div>
+    </div>
+  </div>
+</div>

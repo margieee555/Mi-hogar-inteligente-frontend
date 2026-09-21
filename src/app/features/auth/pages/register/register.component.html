@@ -1,0 +1,160 @@
+<div class="bg-background text-on-background font-body-lg min-h-[100dvh] flex selection:bg-primary/20 selection:text-primary">
+
+  <!-- Left Side: Atmospheric Branding (Desktop) -->
+  <div class="hidden md:flex md:w-[45%] lg:w-1/2 relative overflow-hidden items-center justify-center bg-surface-variant">
+    <div class="absolute inset-0 bg-cover bg-center"
+         style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDKYm98LMvPaNVKCDyBEMIU7OnHlVWSIMGM9K1CPH3bJ1PBb1eGxUF1oNRC35rO72v99t0mrQ20KzLcyENsitavbAr56PZnhTuM9vgXoGQTmMNFwu-CNNSc93MjjHeQy72zxCe8T05HsW2pHxwQsRn7F-Al9Rue_U7LFlw9iDQwzHvGfAYa6tHdBr2TMiFEPGskcsbigrsvQ5ez2LCnZzWPfP9-Bw9QdyBKxRis5OzTDulCcE8GMQvo9Q')"></div>
+    <div class="absolute inset-0 bg-gradient-to-br from-primary-fixed-dim/90 to-surface-variant/90 mix-blend-multiply backdrop-blur-sm"></div>
+    <div class="relative z-10 flex flex-col items-center text-center px-xl max-w-[500px]">
+      <div class="w-20 h-20 bg-surface-container-lowest rounded-2xl flex items-center justify-center shadow-[0px_8px_30px_rgba(0,0,0,0.08)] mb-md">
+        <span class="material-symbols-outlined text-primary text-[40px]" style="font-variation-settings: 'FILL' 1;">home_app_logo</span>
+      </div>
+      <h1 class="font-display-lg text-display-lg text-on-primary-fixed mb-sm">Hogar360</h1>
+      <p class="font-title-md text-title-md text-on-primary-fixed-variant opacity-90">
+        Transformando la complejidad del hogar en una experiencia serena y estructurada.
+      </p>
+    </div>
+  </div>
+
+  <!-- Right Side: Interaction Canvas -->
+  <div class="w-full md:w-[55%] lg:w-1/2 flex items-center justify-center p-md sm:p-xl lg:p-[64px] bg-background">
+    <div class="w-full max-w-[440px] flex flex-col">
+
+      <!-- Mobile Brand Header -->
+      <div class="md:hidden flex items-center gap-xs mb-lg justify-center">
+        <div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center shadow-[0px_4px_20px_rgba(37,99,235,0.2)]">
+          <span class="material-symbols-outlined text-on-primary" style="font-variation-settings: 'FILL' 1;">home_app_logo</span>
+        </div>
+        <span class="font-headline-lg-mobile text-headline-lg-mobile text-primary tracking-tight">Hogar360</span>
+      </div>
+
+      <!-- Main Form Card -->
+      <div class="bg-surface-container-lowest rounded-2xl shadow-[0px_4px_20px_rgba(0,0,0,0.05)] p-md sm:p-lg border border-outline-variant/30">
+        <div class="mb-lg">
+          <h2 class="font-headline-lg text-headline-lg text-on-surface mb-base hidden sm:block">Crea tu cuenta</h2>
+          <h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-base sm:hidden">Crea tu cuenta</h2>
+          <p class="font-body-sm text-body-sm text-on-surface-variant">Comienza a organizar tu entorno familiar hoy mismo.</p>
+        </div>
+
+        <!-- Mensaje de error general -->
+        @if (errorMessage()) {
+          <div class="mb-sm p-sm rounded-xl bg-error-container text-on-error-container font-body-sm text-body-sm">
+            {{ errorMessage() }}
+          </div>
+        }
+
+        <form class="flex flex-col gap-sm" [formGroup]="form" (ngSubmit)="onSubmit()">
+
+          <!-- Input: Nombre -->
+          <div class="flex flex-col gap-base">
+            <label class="font-label-caps text-label-caps text-on-surface-variant" for="name">Nombre</label>
+            <div class="relative flex items-center group">
+              <span class="material-symbols-outlined absolute left-sm text-outline group-focus-within:text-primary transition-colors">person</span>
+              <input
+                id="name"
+                type="text"
+                formControlName="name"
+                placeholder="Ej. Ana García"
+                class="w-full h-12 bg-surface-container-low border-none rounded-xl pl-xl pr-sm font-body-lg text-body-lg text-on-surface placeholder:text-outline-variant focus:ring-2 focus:ring-primary focus:bg-surface-container-lowest transition-all" />
+            </div>
+            @if (form.get('name')?.touched && form.get('name')?.invalid) {
+              <span class="font-body-sm text-body-sm text-error">El nombre es obligatorio</span>
+            }
+          </div>
+
+          <!-- Input: Correo -->
+          <div class="flex flex-col gap-base">
+            <label class="font-label-caps text-label-caps text-on-surface-variant" for="email">Correo</label>
+            <div class="relative flex items-center group">
+              <span class="material-symbols-outlined absolute left-sm text-outline group-focus-within:text-primary transition-colors">mail</span>
+              <input
+                id="email"
+                type="email"
+                formControlName="email"
+                placeholder="ana@ejemplo.com"
+                class="w-full h-12 bg-surface-container-low border-none rounded-xl pl-xl pr-sm font-body-lg text-body-lg text-on-surface placeholder:text-outline-variant focus:ring-2 focus:ring-primary focus:bg-surface-container-lowest transition-all" />
+            </div>
+            @if (form.get('email')?.touched && form.get('email')?.invalid) {
+              <span class="font-body-sm text-body-sm text-error">Ingresa un correo válido</span>
+            }
+          </div>
+
+          <!-- Input: Contraseña -->
+          <div class="flex flex-col gap-base">
+            <label class="font-label-caps text-label-caps text-on-surface-variant" for="password">Contraseña</label>
+            <div class="relative flex items-center group">
+              <span class="material-symbols-outlined absolute left-sm text-outline group-focus-within:text-primary transition-colors">lock</span>
+              <input
+                id="password"
+                [type]="showPassword() ? 'text' : 'password'"
+                formControlName="password"
+                placeholder="••••••••"
+                class="w-full h-12 bg-surface-container-low border-none rounded-xl pl-xl pr-sm font-body-lg text-body-lg text-on-surface placeholder:text-outline-variant focus:ring-2 focus:ring-primary focus:bg-surface-container-lowest transition-all" />
+              <button type="button" (click)="togglePasswordVisibility()"
+                      class="absolute right-sm text-outline hover:text-on-surface-variant transition-colors flex items-center justify-center">
+                <span class="material-symbols-outlined text-[20px]">{{ showPassword() ? 'visibility' : 'visibility_off' }}</span>
+              </button>
+            </div>
+            @if (form.get('password')?.touched && form.get('password')?.invalid) {
+              <span class="font-body-sm text-body-sm text-error">Mínimo 8 caracteres</span>
+            }
+          </div>
+
+          <!-- Input: Confirmar Contraseña -->
+          <div class="flex flex-col gap-base">
+            <label class="font-label-caps text-label-caps text-on-surface-variant" for="confirm_password">Confirmar contraseña</label>
+            <div class="relative flex items-center group">
+              <span class="material-symbols-outlined absolute left-sm text-outline group-focus-within:text-primary transition-colors">verified_user</span>
+              <input
+                id="confirm_password"
+                type="password"
+                formControlName="confirmPassword"
+                placeholder="••••••••"
+                class="w-full h-12 bg-surface-container-low border-none rounded-xl pl-xl pr-sm font-body-lg text-body-lg text-on-surface placeholder:text-outline-variant focus:ring-2 focus:ring-primary focus:bg-surface-container-lowest transition-all" />
+            </div>
+            @if (form.errors?.['passwordMismatch'] && form.get('confirmPassword')?.touched) {
+              <span class="font-body-sm text-body-sm text-error">Las contraseñas no coinciden</span>
+            }
+          </div>
+
+          <!-- Primary Action -->
+          <button
+            type="submit"
+            [disabled]="loading()"
+            class="w-full h-12 mt-xs bg-primary text-on-primary rounded-xl font-title-md text-title-md flex items-center justify-center gap-xs shadow-[0px_4px_10px_rgba(37,99,235,0.2)] hover:shadow-[0px_8px_20px_rgba(37,99,235,0.3)] hover:-translate-y-[1px] active:scale-[0.98] transition-all duration-200 disabled:opacity-60 disabled:pointer-events-none">
+            {{ loading() ? 'Creando cuenta...' : 'Crear cuenta' }}
+            @if (!loading()) {
+              <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+            }
+          </button>
+        </form>
+
+        <!-- Divider -->
+        <div class="flex items-center gap-sm my-md">
+          <div class="h-[1px] bg-outline-variant/50 flex-1"></div>
+          <span class="font-label-caps text-label-caps text-outline uppercase tracking-wider">O continúa con</span>
+          <div class="h-[1px] bg-outline-variant/50 flex-1"></div>
+        </div>
+
+        <!-- Secondary Action: Google -->
+        <button type="button" class="w-full h-12 bg-surface-container-lowest border border-outline-variant rounded-xl flex items-center justify-center gap-sm hover:bg-surface-container-low active:bg-surface-container transition-colors duration-200 group">
+          <svg class="w-5 h-5 group-active:scale-95 transition-transform" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M22.56 12.25C22.56 11.47 22.49 10.72 22.36 10H12V14.26H17.92C17.66 15.63 16.88 16.79 15.71 17.57V20.34H19.28C21.36 18.42 22.56 15.6 22.56 12.25Z" fill="#4285F4"/>
+            <path d="M12 23C14.97 23 17.46 22.02 19.28 20.34L15.71 17.57C14.73 18.23 13.48 18.63 12 18.63C9.14 18.63 6.71 16.7 5.84 14.09H2.18V16.93C3.99 20.53 7.7 23 12 23Z" fill="#34A853"/>
+            <path d="M5.84 14.09C5.62 13.43 5.49 12.73 5.49 12C5.49 11.27 5.62 10.57 5.84 9.91V7.07H2.18C1.43 8.55 1 10.22 1 12C1 13.78 1.43 15.45 2.18 16.93L5.84 14.09Z" fill="#FBBC05"/>
+            <path d="M12 5.38C13.62 5.38 15.06 5.94 16.21 7.02L19.36 3.87C17.45 2.09 14.97 1 12 1C7.7 1 3.99 3.47 2.18 7.07L5.84 9.91C6.71 7.3 9.14 5.38 12 5.38Z" fill="#EA4335"/>
+          </svg>
+          <span class="font-title-md text-title-md text-on-surface">Inicio de sesión con Google</span>
+        </button>
+      </div>
+
+      <!-- Footer Link -->
+      <div class="mt-lg text-center">
+        <p class="font-body-sm text-body-sm text-on-surface-variant">
+          ¿Ya tienes cuenta?
+          <a routerLink="/auth/login" class="text-primary font-semibold hover:text-on-primary-fixed-variant hover:underline transition-colors">Inicia sesión</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
