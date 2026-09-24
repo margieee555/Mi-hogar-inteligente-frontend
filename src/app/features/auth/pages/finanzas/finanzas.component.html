@@ -1,0 +1,159 @@
+<div class="bg-background text-on-background min-h-screen flex flex-col pt-16 pb-24 md:pb-0">
+
+    <!-- Barra Superior -->
+    <header class="app-header">
+        <div class="flex items-center gap-sm">
+            <span class="material-symbols-outlined text-primary dark:text-primary-fixed icono-relleno">home_app_logo</span>
+            <span class="app-title font-bold text-lg">Mi Hogar 360</span>
+        </div>
+        <nav class="hidden md:flex items-center gap-lg">
+            <a class="nav-link" href="/menu-principal"><span class="material-symbols-outlined">home</span>Inicio</a>
+            <a class="nav-link active" href="/finanzas"><span class="material-symbols-outlined icono-relleno">account_balance_wallet</span>Finanzas</a>
+            <a class="nav-link" href="#"><span class="material-symbols-outlined">shopping_cart</span>Compras</a>
+            <a class="nav-link" href="#"><span class="material-symbols-outlined">assignment</span>Tareas</a>
+            <a class="nav-link" href="#"><span class="material-symbols-outlined">inventory_2</span>Inventario</a>
+            <a class="nav-link" href="#"><span class="material-symbols-outlined">analytics</span>Estadísticas</a>
+        </nav>
+        
+        <div class="flex items-center gap-2">
+            <button class="notification-btn" aria-label="Notificaciones">
+                <span class="material-symbols-outlined">notifications</span>
+            </button>
+            <button class="notification-btn" aria-label="Perfil de Usuario">
+                <span class="material-symbols-outlined">person</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Contenido Principal -->
+    <main class="flex-grow container mx-auto px-md py-lg max-w-container-max relative">
+
+        <!-- Título de Sección -->
+        <div class="mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+            <div>
+                <h1 class="text-3xl font-bold text-gray-900 tracking-tight">Gestión Financiera</h1>
+                <p class="font-body-lg text-[--color-texto-secundario] max-w-lg mt-2">
+                    Controla tu balance, gastos por categoría y metas de ahorro.
+                </p>
+            </div>
+            <button (click)="descargarReporte()" class="flex items-center gap-2 bg-white border border-gray-300 text-gray-700 px-4 py-2 rounded-xl hover:bg-gray-50 transition-colors shadow-sm font-semibold text-sm">
+                <span class="material-symbols-outlined text-lg">download</span>
+                Descargar Reporte
+            </button>
+        </div>
+
+        <!-- Estructura Bento Grid de Finanzas -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+
+            <!-- Tarjeta 1: Balance Total -->
+            <div class="bg-white border border-gray-100 border-t-4 border-t-blue-600 rounded-2xl p-6 shadow-sm col-span-1 md:col-span-12 lg:col-span-4 flex flex-col justify-between">
+                <div>
+                    <h2 class="text-lg font-semibold text-gray-600 mb-2">Balance Total</h2>
+                    <p class="text-4xl md:text-5xl font-bold text-blue-600 tracking-tight">${{ balanceTotal | number:'1.2-2' }}</p>
+                </div>
+                <div class="flex gap-4 mt-8">
+                    <div class="flex-1 bg-green-50 p-4 rounded-xl">
+                        <span class="text-xs font-bold text-green-700 uppercase tracking-wider flex items-center gap-1 mb-1">
+                            <span class="material-symbols-outlined text-[16px]">arrow_upward</span> Ingresos
+                        </span>
+                        <span class="text-lg font-bold text-gray-900">${{ totalIngresos | number:'1.2-2' }}</span>
+                    </div>
+                    <div class="flex-1 bg-red-50 p-4 rounded-xl">
+                        <span class="text-xs font-bold text-red-700 uppercase tracking-wider flex items-center gap-1 mb-1">
+                            <span class="material-symbols-outlined text-[16px]">arrow_downward</span> Gastos
+                        </span>
+                        <span class="text-lg font-bold text-gray-900">${{ totalGastos | number:'1.2-2' }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tarjeta 2: Gasto por Categoría -->
+            <div class="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm col-span-1 md:col-span-12 lg:col-span-8 flex flex-col">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-lg font-semibold text-gray-900">Gasto por Categoría</h2>
+                    <button (click)="verDetalleCategoria()" class="text-sm font-semibold text-blue-600 hover:bg-blue-50 px-3 py-1.5 rounded-lg transition-colors">Ver detalle</button>
+                </div>
+                <div class="flex-1 flex flex-col justify-center gap-5">
+                    
+                    <!-- Ciclo de Angular para generar las categorías automáticamente -->
+                    <div *ngFor="let cat of categorias" class="flex items-center gap-4">
+                        <div class="w-24 text-sm font-medium text-gray-600 flex items-center gap-2">
+                            <span class="material-symbols-outlined text-gray-400">{{ cat.icono }}</span> {{ cat.nombre }}
+                        </div>
+                        <div class="flex-1 h-2.5 bg-gray-100 rounded-full overflow-hidden">
+                            <div [ngClass]="['h-full rounded-full', cat.colorBarra]" [style.width]="cat.porcentaje"></div>
+                        </div>
+                        <div class="w-16 text-right text-sm font-bold text-gray-900">${{ cat.monto }}</div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Tarjeta 3: Metas de Ahorro -->
+            <div class="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm col-span-1 md:col-span-12 lg:col-span-5 flex flex-col">
+                <div class="flex items-center gap-2 mb-6">
+                    <span class="material-symbols-outlined text-blue-600">target</span>
+                    <h2 class="text-lg font-semibold text-gray-900">Metas de ahorro</h2>
+                </div>
+                <div class="flex flex-col gap-6">
+                    
+                    <div *ngFor="let meta of metas">
+                        <div class="flex justify-between items-end mb-2">
+                            <span class="text-sm font-semibold text-gray-900">{{ meta.nombre }}</span>
+                            <span [ngClass]="['text-sm font-bold', meta.colorTexto]">{{ meta.progresoStr }}</span>
+                        </div>
+                        <div class="h-2.5 bg-gray-100 rounded-full overflow-hidden">
+                            <div [ngClass]="['h-full rounded-full', meta.colorFondo]" [style.width]="meta.progresoStr"></div>
+                        </div>
+                        <p class="text-xs font-semibold text-gray-500 mt-2 text-right">${{ meta.actual | number }} / ${{ meta.objetivo | number }}</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Tarjeta 4: Transacciones Recientes -->
+            <div class="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm col-span-1 md:col-span-12 lg:col-span-7 flex flex-col">
+                <h2 class="text-lg font-semibold text-gray-900 mb-4">Transacciones recientes</h2>
+                <div class="flex flex-col gap-2 flex-1">
+                    
+                    <div *ngFor="let transaccion of transacciones" 
+                         (click)="verDetalleTransaccion(transaccion.id)"
+                         class="flex items-center justify-between p-3 rounded-xl hover:bg-gray-50 border border-transparent hover:border-gray-100 transition-all cursor-pointer">
+                        <div class="flex items-center gap-4">
+                            <div [ngClass]="['w-10 h-10 rounded-full flex items-center justify-center', transaccion.colorFondoIcono, transaccion.colorIcono]">
+                                <span class="material-symbols-outlined text-[20px]">{{ transaccion.icono }}</span>
+                            </div>
+                            <div>
+                                <h3 class="text-sm font-semibold text-gray-900">{{ transaccion.titulo }}</h3>
+                                <p class="text-xs text-gray-500">{{ transaccion.subtitulo }}</p>
+                            </div>
+                        </div>
+                        <span [ngClass]="['text-sm font-bold', transaccion.colorMonto]">{{ transaccion.monto }}</span>
+                    </div>
+
+                </div>
+                <button (click)="verTodasTransacciones()" class="w-full mt-4 py-3 bg-gray-50 hover:bg-gray-100 text-blue-600 font-semibold text-sm rounded-xl transition-colors">
+                    Ver todas las transacciones
+                </button>
+            </div>
+
+        </div>
+
+        <!-- Botón Flotante para Agregar (FAB) -->
+        <button (click)="abrirRegistroTransaccion()" class="fixed bottom-24 md:bottom-10 right-6 md:right-10 w-14 h-14 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl shadow-lg flex items-center justify-center transition-transform hover:scale-105 z-40" aria-label="Registrar ingreso o gasto">
+            <span class="material-symbols-outlined text-2xl">add</span>
+        </button>
+
+    </main>
+
+    <!-- Barra de Navegación Inferior (Móvil) -->
+    <nav class="mobile-bottom-nav overflow-x-auto no-scrollbar">
+        <a class="mobile-nav-item flex-shrink-0" href="/menu-principal"><span class="material-symbols-outlined">home</span><span>Inicio</span></a>
+        <a class="mobile-nav-item active flex-shrink-0" href="/finanzas"><span class="material-symbols-outlined icono-relleno">account_balance_wallet</span><span>Finanzas</span></a>
+        <a class="mobile-nav-item flex-shrink-0" href="#"><span class="material-symbols-outlined">shopping_cart</span><span>Compras</span></a>
+        <a class="mobile-nav-item flex-shrink-0" href="#"><span class="material-symbols-outlined">assignment</span><span>Tareas</span></a>
+        <a class="mobile-nav-item flex-shrink-0" href="#"><span class="material-symbols-outlined">inventory_2</span><span>Inventario</span></a>
+        <a class="mobile-nav-item flex-shrink-0" href="#"><span class="material-symbols-outlined">analytics</span><span>Estad.</span></a>
+        <a class="mobile-nav-item flex-shrink-0" href="#"><span class="material-symbols-outlined">person</span><span>Perfil</span></a>
+    </nav>
+</div>
