@@ -5,8 +5,10 @@ import { MenuPrincipalComponent } from './features/auth/pages/menu-principal/men
 import { FinanzasComponent } from './features/auth/pages/finanzas/finanzas.component';
 import { InventarioComponent } from './features/auth/pages/inventario/inventario.component';
 import { ComprasComponent } from './features/auth/pages/compras/compras.component';
-// Importación del nuevo componente de Tareas
 import { TareasComponent } from './features/auth/pages/tareas/tareas.component';
+import { PerfilComponent } from './features/auth/pages/perfil/perfil.component';
+// Importación del nuevo componente de Estadísticas
+import { EstadisticasComponent } from './features/auth/pages/estadisticas/estadisticas.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'auth/welcome', pathMatch: 'full' },
@@ -16,9 +18,11 @@ export const routes: Routes = [
   { path: 'finanzas', component: FinanzasComponent },
   { path: 'inventario', component: InventarioComponent },
   { path: 'compras', component: ComprasComponent },
-  
-  // Nueva ruta de Tareas registrada
   { path: 'tareas', component: TareasComponent },
+  { path: 'perfil', component: PerfilComponent },
+  
+  // Nueva ruta de Estadísticas registrada
+  { path: 'estadisticas', component: EstadisticasComponent },
 
   {
     path: 'auth',

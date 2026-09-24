@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu-principal',
@@ -30,6 +31,8 @@ export class MenuPrincipalComponent implements OnInit {
   nuevaTarea = { nombre: '', categoria: 'limpieza', fecha: '', hora: '', prioridad: 'media', asignadoA: '' };
   nuevoGasto = { monto: null, categoria: 'otros', fecha: '', descripcion: '', recibo: null };
   nuevoMiembro = { nombre: '', avatar: 'face', permiso: 'admin', notas: '' };
+
+  constructor(private router: Router) {}
 
   ngOnInit() {
     this.configurarFechas();
@@ -95,5 +98,9 @@ export class MenuPrincipalComponent implements OnInit {
     console.log("Guardando en Mi Hogar 360 -> Miembro:", this.nuevoMiembro);
     alert("¡Miembro invitado con éxito a Mi Hogar 360!");
     this.cerrarModal();
+  }
+
+  irAlPerfil() {
+    this.router.navigate(['/perfil']);
   }
 }

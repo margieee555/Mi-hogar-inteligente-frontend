@@ -9,17 +9,16 @@
         <nav class="hidden md:flex items-center gap-lg">
             <a class="nav-link active" href="/menu-principal"><span class="material-symbols-outlined icono-relleno">home</span>Inicio</a>
             <a class="nav-link" href="/finanzas"><span class="material-symbols-outlined">account_balance_wallet</span>Finanzas</a>
-            <!-- Enlace a Compras actualizado -->
             <a class="nav-link" href="/compras"><span class="material-symbols-outlined">shopping_cart</span>Compras</a>
-            <a class="nav-link" href="#"><span class="material-symbols-outlined">assignment</span>Tareas</a>
+            <a class="nav-link" href="/tareas"><span class="material-symbols-outlined">assignment</span>Tareas</a>
             <a class="nav-link" href="/inventario"><span class="material-symbols-outlined">inventory_2</span>Inventario</a>
-            <a class="nav-link" href="#"><span class="material-symbols-outlined">analytics</span>Estadísticas</a>
+            <a class="nav-link" href="/estadisticas"><span class="material-symbols-outlined">analytics</span>Estadísticas</a>
         </nav>
         <div class="flex items-center gap-2">
             <button class="notification-btn" aria-label="Notificaciones">
                 <span class="material-symbols-outlined">notifications</span>
             </button>
-            <button class="notification-btn" aria-label="Perfil de Usuario">
+            <button (click)="irAlPerfil()" class="notification-btn flex items-center justify-center cursor-pointer" aria-label="Perfil de Usuario">
                 <span class="material-symbols-outlined">person</span>
             </button>
         </div>
@@ -44,7 +43,6 @@
             </div>
 
             <div class="bento-grid">
-                <!-- Tarjeta de Calendario (Compacta) -->
                 <div class="bento-calendar">
                     <div class="flex justify-between items-center mb-3">
                         <h2 class="text-lg font-semibold text-gray-800">{{ mesActualStr }}</h2>
@@ -54,7 +52,6 @@
                         </div>
                     </div>
 
-                    <!-- Leyenda Simplificada -->
                     <div class="flex flex-wrap gap-3 mb-3 pb-3 border-b border-gray-200">
                         <div class="flex items-center gap-1.5"><div class="w-2.5 h-2.5 rounded-full event-blue"></div><span class="text-xs text-gray-600">Pagos</span></div>
                         <div class="flex items-center gap-1.5"><div class="w-2.5 h-2.5 rounded-full event-green"></div><span class="text-xs text-gray-600">Tareas</span></div>
@@ -62,7 +59,6 @@
                         <div class="flex items-center gap-1.5"><div class="w-2.5 h-2.5 rounded-full event-purple"></div><span class="text-xs text-gray-600">Familiar</span></div>
                     </div>
 
-                    <!-- Grilla del Calendario -->
                     <div class="grid-cols-7 text-center mb-1">
                         <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">Lun</div>
                         <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">Mar</div>
@@ -84,7 +80,6 @@
                     </div>
                 </div>
 
-                <!-- Lista de Eventos -->
                 <div class="bento-events">
                     <div class="events-card">
                         <div class="mb-3">
@@ -178,12 +173,11 @@
     <nav class="mobile-bottom-nav overflow-x-auto no-scrollbar">
         <a class="mobile-nav-item active flex-shrink-0" href="/menu-principal"><span class="material-symbols-outlined icono-relleno">home</span><span>Inicio</span></a>
         <a class="mobile-nav-item flex-shrink-0" href="/finanzas"><span class="material-symbols-outlined">account_balance_wallet</span><span>Finanzas</span></a>
-        <!-- Enlace a Compras actualizado en móvil -->
         <a class="mobile-nav-item flex-shrink-0" href="/compras"><span class="material-symbols-outlined">shopping_cart</span><span>Compras</span></a>
-        <a class="mobile-nav-item flex-shrink-0" href="#"><span class="material-symbols-outlined">assignment</span><span>Tareas</span></a>
+        <a class="mobile-nav-item flex-shrink-0" href="/tareas"><span class="material-symbols-outlined">assignment</span><span>Tareas</span></a>
         <a class="mobile-nav-item flex-shrink-0" href="/inventario"><span class="material-symbols-outlined">inventory_2</span><span>Inventario</span></a>
-        <a class="mobile-nav-item flex-shrink-0" href="#"><span class="material-symbols-outlined">analytics</span><span>Estad.</span></a>
-        <a class="mobile-nav-item flex-shrink-0" href="#"><span class="material-symbols-outlined">person</span><span>Perfil</span></a>
+        <a class="mobile-nav-item flex-shrink-0" href="/estadisticas"><span class="material-symbols-outlined">analytics</span><span>Estad.</span></a>
+        <a class="mobile-nav-item flex-shrink-0 cursor-pointer" (click)="irAlPerfil()"><span class="material-symbols-outlined">person</span><span>Perfil</span></a>
     </nav>
 </div>
 

@@ -1,0 +1,171 @@
+<div class="bg-background text-on-background min-h-screen flex flex-col pt-16 pb-24 md:pb-0">
+
+    <!-- Barra Superior -->
+    <header class="app-header">
+        <div class="flex items-center gap-sm">
+            <span class="material-symbols-outlined text-primary dark:text-primary-fixed icono-relleno">home_app_logo</span>
+            <span class="app-title font-bold text-lg">Mi Hogar 360</span>
+        </div>
+        <nav class="hidden md:flex items-center gap-lg">
+            <a class="nav-link" href="/menu-principal"><span class="material-symbols-outlined">home</span>Inicio</a>
+            <a class="nav-link" href="/finanzas"><span class="material-symbols-outlined">account_balance_wallet</span>Finanzas</a>
+            <a class="nav-link" href="/compras"><span class="material-symbols-outlined">shopping_cart</span>Compras</a>
+            <a class="nav-link" href="/tareas"><span class="material-symbols-outlined">assignment</span>Tareas</a>
+            <a class="nav-link" href="/inventario"><span class="material-symbols-outlined">inventory_2</span>Inventario</a>
+            <a class="nav-link active" href="/estadisticas"><span class="material-symbols-outlined icono-relleno">analytics</span>Estadísticas</a>
+            <a class="nav-link" href="/perfil"><span class="material-symbols-outlined">person</span>Perfil</a>
+        </nav>
+        
+        <div class="flex items-center gap-2">
+            <button class="notification-btn" aria-label="Notificaciones">
+                <span class="material-symbols-outlined">notifications</span>
+            </button>
+            <a href="/perfil" class="notification-btn flex items-center justify-center cursor-pointer" aria-label="Perfil de Usuario">
+                <span class="material-symbols-outlined">person</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Contenido Principal -->
+    <main class="flex-grow container mx-auto px-md py-lg max-w-container-max relative">
+
+        <div class="mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+            <div>
+                <h1 class="text-3xl font-bold text-gray-900 tracking-tight">Reportes y Estadísticas</h1>
+                <p class="font-body-lg text-[--color-texto-secundario] max-w-lg mt-2">
+                    Análisis financiero y de consumo del hogar.
+                </p>
+            </div>
+            <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 w-full md:w-auto">
+                <div class="bg-gray-100 p-1 rounded-xl flex items-center w-full sm:w-auto">
+                    <button (click)="cambiarPeriodo('mensual')" 
+                            [ngClass]="periodoActual === 'mensual' ? 'active bg-white text-gray-900 shadow-sm' : 'text-gray-500 hover:text-gray-900'"
+                            class="flex-1 sm:flex-none px-4 py-2 text-sm font-semibold rounded-lg transition-all">Mensual</button>
+                    
+                    <button (click)="cambiarPeriodo('trimestral')" 
+                            [ngClass]="periodoActual === 'trimestral' ? 'active bg-white text-gray-900 shadow-sm' : 'text-gray-500 hover:text-gray-900'"
+                            class="flex-1 sm:flex-none px-4 py-2 text-sm font-semibold rounded-lg transition-all">Trimestral</button>
+                    
+                    <button (click)="cambiarPeriodo('anual')" 
+                            [ngClass]="periodoActual === 'anual' ? 'active bg-white text-gray-900 shadow-sm' : 'text-gray-500 hover:text-gray-900'"
+                            class="flex-1 sm:flex-none px-4 py-2 text-sm font-semibold rounded-lg transition-all">Anual</button>
+                </div>
+                <button (click)="exportarPDF()" class="w-full sm:w-auto flex items-center justify-center gap-2 bg-blue-600 text-white px-5 py-2.5 rounded-xl hover:bg-blue-700 transition-colors shadow-sm font-semibold text-sm">
+                    <span class="material-symbols-outlined text-[20px]">picture_as_pdf</span>
+                    Exportar PDF
+                </button>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+
+            <!-- Evolución del Ahorro -->
+            <div class="bg-white border border-gray-100 border-t-4 border-t-green-500 rounded-2xl p-6 shadow-sm col-span-1 md:col-span-12 lg:col-span-8 flex flex-col min-h-[350px]">
+                <div class="flex justify-between items-start mb-6">
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-green-600">trending_up</span>
+                        <h3 class="text-lg font-semibold text-gray-900">Evolución del Ahorro</h3>
+                    </div>
+                    <span class="text-2xl font-bold text-green-600">+$1,250.00</span>
+                </div>
+                
+                <div class="flex-1 relative bg-blue-50/50 rounded-xl overflow-hidden p-4 flex items-end">
+                    <svg class="absolute inset-0 w-full h-full" preserveAspectRatio="none" viewBox="0 0 100 100">
+                        <path d="M0,80 Q20,70 40,50 T80,30 T100,10" fill="none" stroke="#22c55e" stroke-linecap="round" stroke-width="3"></path>
+                        <path d="M0,80 Q20,70 40,50 T80,30 T100,10 L100,100 L0,100 Z" fill="url(#grad1)" opacity="0.2"></path>
+                        <defs>
+                            <linearGradient id="grad1" x1="0%" x2="0%" y1="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#22c55e;stop-opacity:1"></stop>
+                                <stop offset="100%" style="stop-color:#22c55e;stop-opacity:0"></stop>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    
+                    <div class="absolute left-4 top-4 bottom-6 flex flex-col justify-between text-xs font-semibold text-gray-400 tracking-wider">
+                        <span>$2k</span>
+                        <span>$1.5k</span>
+                        <span>$1k</span>
+                        <span>$500</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mayor Gasto -->
+            <div class="bg-white border border-gray-100 border-t-4 border-t-red-500 rounded-2xl p-6 shadow-sm col-span-1 md:col-span-12 lg:col-span-4 flex flex-col">
+                <div>
+                    <div class="flex items-center gap-2 mb-1">
+                        <span class="material-symbols-outlined text-red-500">warning</span>
+                        <h3 class="text-lg font-semibold text-gray-900">Mayor Gasto</h3>
+                    </div>
+                    <p class="text-sm text-gray-500 mb-8">Categoría con más impacto este mes.</p>
+                </div>
+                
+                <div class="flex-1 flex flex-col items-center justify-center">
+                    <div class="w-20 h-20 rounded-full bg-red-50 flex items-center justify-center mb-4">
+                        <span class="material-symbols-outlined text-red-600 text-[40px]">shopping_bag</span>
+                    </div>
+                    <h4 class="text-2xl font-bold text-gray-900">Supermercado</h4>
+                    <p class="text-5xl font-bold text-red-500 tracking-tight mt-2">-$840.50</p>
+                    <span class="mt-4 px-4 py-1.5 bg-red-50 text-red-600 text-xs font-bold rounded-full uppercase tracking-wider">
+                        +15% vs mes anterior
+                    </span>
+                </div>
+            </div>
+
+            <!-- Comparativo de Gastos Dinámico -->
+            <div class="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm col-span-1 md:col-span-12">
+                <div class="flex items-center gap-2 mb-6">
+                    <span class="material-symbols-outlined text-blue-600">bar_chart</span>
+                    <h3 class="text-lg font-semibold text-gray-900">Comparativo de Gastos (Últimos 3 meses)</h3>
+                </div>
+                
+                <div class="relative flex items-end justify-around h-64 mt-4 pt-4 border-b border-gray-100">
+                    <div class="absolute left-0 top-0 bottom-0 flex flex-col justify-between text-xs font-semibold text-gray-400 text-right pr-2 w-12">
+                        <span>$3k</span>
+                        <span>$2k</span>
+                        <span>$1k</span>
+                        <span>$0</span>
+                    </div>
+
+                    <!-- Generación de barras con *ngFor -->
+                    <div *ngFor="let dato of datosComparativo" class="flex flex-col items-center gap-2 z-10 w-1/4 group">
+                        <div class="flex gap-2 w-full justify-center items-end h-48 relative">
+                            <!-- Barra Gasto -->
+                            <div class="w-8 md:w-12 bg-blue-600 rounded-t-md transition-opacity hover:opacity-80 relative flex justify-center" [style.height]="dato.gastoAlto">
+                                <div class="absolute -top-8 bg-gray-800 text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 pointer-events-none whitespace-nowrap transition-opacity">{{ dato.gastoVal }}</div>
+                            </div>
+                            <!-- Barra Ahorro -->
+                            <div class="w-8 md:w-12 bg-green-500 rounded-t-md transition-opacity hover:opacity-80 relative flex justify-center" [style.height]="dato.ahorroAlto">
+                                <div class="absolute -top-8 bg-gray-800 text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 pointer-events-none whitespace-nowrap transition-opacity">{{ dato.ahorroVal }}</div>
+                            </div>
+                        </div>
+                        <span class="text-xs font-bold text-gray-600 tracking-wider">{{ dato.mes }}</span>
+                    </div>
+                </div>
+
+                <div class="flex justify-center gap-6 mt-6">
+                    <div class="flex items-center gap-2">
+                        <div class="w-3 h-3 rounded-full bg-blue-600"></div>
+                        <span class="text-xs font-bold text-gray-600 uppercase tracking-wider">Gastos Fijos</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                        <span class="text-xs font-bold text-gray-600 uppercase tracking-wider">Ahorro Generado</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Barra de Navegación Inferior (Móvil) -->
+    <nav class="mobile-bottom-nav overflow-x-auto no-scrollbar">
+        <a class="mobile-nav-item flex-shrink-0" href="/menu-principal"><span class="material-symbols-outlined">home</span><span>Inicio</span></a>
+        <a class="mobile-nav-item flex-shrink-0" href="/finanzas"><span class="material-symbols-outlined">account_balance_wallet</span><span>Finanzas</span></a>
+        <a class="mobile-nav-item flex-shrink-0" href="/compras"><span class="material-symbols-outlined">shopping_cart</span><span>Compras</span></a>
+        <a class="mobile-nav-item flex-shrink-0" href="/tareas"><span class="material-symbols-outlined">assignment</span><span>Tareas</span></a>
+        <a class="mobile-nav-item flex-shrink-0" href="/inventario"><span class="material-symbols-outlined">inventory_2</span><span>Inventario</span></a>
+        <a class="mobile-nav-item active flex-shrink-0" href="/estadisticas"><span class="material-symbols-outlined icono-relleno">analytics</span><span>Estad.</span></a>
+        <a class="mobile-nav-item flex-shrink-0 cursor-pointer" href="/perfil"><span class="material-symbols-outlined">person</span><span>Perfil</span></a>
+    </nav>
+</div>
