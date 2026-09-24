@@ -38,29 +38,19 @@ export class LoginComponent {
   onSubmit(): void {
     this.errorMessage.set(null);
 
+    // 1. Mantenemos la validación visual (verifica que los campos no estén vacíos)
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
     }
 
+    // 2. Activamos la animación de "Ingresando..." en el botón
     this.loading.set(true);
 
-    const { email, password } = this.form.getRawValue();
-
-    this.authService.login({
-      email: email!,
-      password: password!
-    }).subscribe({
-      next: () => {
-        this.loading.set(false);
-        this.router.navigate(['/configuracion']); // <-- Tu nueva vista
-      },
-      error: (err: HttpErrorResponse) => {
-        this.loading.set(false);
-        this.errorMessage.set(
-          err.error?.message ?? 'Correo o contraseña incorrectos'
-        );
-      }
-    });
+    // 3. Simulamos que piensa por 1 segundo y luego redirigimos forzosamente a tu nueva página
+    setTimeout(() => {
+      this.loading.set(false);
+      this.router.navigate(['/configuracion']);
+    }, 1000);
   }
 }
