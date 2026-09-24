@@ -1,0 +1,467 @@
+/* ENTORNO AISLADO DEL COMPONENTE */
+:host {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 30px;
+    background: var(--color-fondo);
+    font-family: "Inter", sans-serif;
+    color: var(--color-texto-principal);
+    
+    /* Definición de variables CSS */
+    --color-primario: #2563eb;
+    --color-primario-hover: #1d4ed8;
+    --color-fondo: #f4f7fc;
+    --color-superficie: #ffffff;
+    --color-texto-principal: #0b1c30;
+    --color-texto-secundario: #667085;
+    --color-texto-mutado: #7a8494;
+    --color-borde: #d8dee9;
+    --color-campo-fondo: #f1f5f9;
+    --color-error: #dc2626;
+    --color-error-fondo: #fef2f2;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ==========================================
+   ESTILOS GENERALES Y PASO 1
+   ========================================== */
+
+.contenedor-principal {
+    width: 100%;
+    max-width: 720px;
+    background: var(--color-superficie);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+}
+
+.encabezado {
+    padding: 40px 48px 25px;
+}
+
+.barra-progreso {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 28px;
+}
+
+.progreso {
+    height: 7px;
+    flex: 1;
+    border-radius: 20px;
+    background: #dbe5f5;
+    transition: background-color 0.3s ease;
+}
+
+.progreso.activo {
+    background: var(--color-primario);
+}
+
+.numero-paso {
+    display: block;
+    margin-bottom: 8px;
+    color: #6b7280;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+h1 {
+    font-size: 32px;
+    line-height: 1.25;
+    font-weight: 700;
+    color: var(--color-texto-principal);
+    margin-bottom: 8px;
+}
+
+.descripcion {
+    color: var(--color-texto-secundario);
+    font-size: 15px;
+    line-height: 24px;
+}
+
+.contenido {
+    padding: 20px 48px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+}
+
+.grupo-formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.grupo-formulario label {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--color-texto-principal);
+}
+
+#nombre-hogar, .entrada-texto, .fila-invitado input[type="email"] {
+    width: 100%;
+    height: 55px;
+    padding: 0 18px;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    background: var(--color-campo-fondo);
+    color: var(--color-texto-principal);
+    font-family: "Inter", sans-serif;
+    font-size: 15px;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+#nombre-hogar::placeholder, .entrada-texto::placeholder, .fila-invitado input[type="email"]::placeholder {
+    color: #8a94a6;
+}
+
+#nombre-hogar:focus, .entrada-texto:focus, .fila-invitado input[type="email"]:focus {
+    background: var(--color-superficie);
+    border-color: var(--color-primario);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.10);
+}
+
+#nombre-hogar.error-input {
+    border-color: var(--color-error);
+    background-color: var(--color-error-fondo);
+    animation: agitar 0.3s ease-in-out;
+}
+
+@keyframes agitar {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+.mensaje-error {
+    min-height: 18px;
+    color: var(--color-error);
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.opciones-vivienda {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+}
+
+.tarjeta-vivienda {
+    min-height: 125px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    border: 2px solid var(--color-borde);
+    border-radius: 16px;
+    background: var(--color-superficie);
+    cursor: pointer;
+    font-family: "Inter", sans-serif;
+    transition: all 0.2s ease;
+}
+
+.tarjeta-vivienda:hover {
+    border-color: var(--color-primario);
+    background: #f5f8ff;
+    transform: translateY(-2px);
+}
+
+.tarjeta-vivienda.seleccionada {
+    border-color: var(--color-primario);
+    background: #eff5ff;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.10);
+}
+
+.icono-vivienda {
+    font-size: 38px;
+    color: #697386;
+    font-variation-settings: "FILL" 0;
+}
+
+.tarjeta-vivienda.seleccionada .icono-vivienda {
+    color: var(--color-primario);
+    font-variation-settings: "FILL" 1;
+}
+
+.nombre-vivienda {
+    color: #263548;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.tarjeta-vivienda.seleccionada .nombre-vivienda {
+    color: var(--color-primario);
+}
+
+.contador {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.boton-contador {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 50%;
+    background: #e4edfc;
+    color: #18304f;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.boton-contador:hover:not(:disabled) {
+    background: #d5e3fa;
+    transform: scale(1.05);
+}
+
+.boton-contador:active:not(:disabled) {
+    transform: scale(0.95);
+}
+
+.boton-contador:disabled {
+    background: var(--color-campo-fondo);
+    color: #cbd5e1;
+    cursor: not-allowed;
+}
+
+.cantidad-residentes {
+    width: 50px;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.ayuda {
+    color: var(--color-texto-mutado);
+    font-size: 13px;
+}
+
+.pie {
+    padding-top: 25px;
+    border-top: 1px solid #e8edf5;
+}
+
+.boton-siguiente {
+    width: 100%;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border: none;
+    border-radius: 14px;
+    background: var(--color-primario);
+    color: #ffffff;
+    font-family: "Inter", sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.boton-siguiente:hover:not(:disabled) {
+    background: var(--color-primario-hover);
+    transform: translateY(-1px);
+}
+
+.boton-siguiente:active:not(:disabled) {
+    transform: scale(0.98);
+}
+
+.boton-siguiente:disabled {
+    opacity: 0.7;
+    cursor: wait;
+}
+
+/* ==========================================
+   ESTILOS ESPECÍFICOS PARA EL PASO 2
+   ========================================== */
+.opcional {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--color-texto-secundario);
+}
+
+.encabezado-invitaciones {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.boton-agregar {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: transparent;
+    border: none;
+    color: var(--color-primario);
+    font-family: "Inter", sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.boton-agregar:hover {
+    color: var(--color-primario-hover);
+}
+
+.lista-invitados {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.fila-invitado {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.boton-eliminar-invitado {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 12px;
+    background: var(--color-campo-fondo);
+    color: var(--color-texto-secundario);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.boton-eliminar-invitado:hover {
+    background: var(--color-error-fondo);
+    color: var(--color-error);
+}
+
+.pie-doble-boton {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.pie-doble-boton .boton-siguiente {
+    flex: 1;
+}
+
+.boton-atras {
+    height: 55px;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: 2px solid var(--color-borde);
+    border-radius: 14px;
+    background: var(--color-superficie);
+    color: var(--color-texto-principal);
+    font-family: "Inter", sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.boton-atras:hover {
+    background: var(--color-campo-fondo);
+    border-color: #c5cedc;
+}
+
+/* ==========================================
+   ESTILOS ESPECÍFICOS PARA EL PASO 3
+   ========================================== */
+.red-zonas {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 12px;
+}
+
+.tarjeta-zona {
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+}
+
+.tarjeta-zona input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.contenido-tarjeta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 16px 12px;
+    border: 2px solid transparent;
+    border-radius: 14px;
+    background: var(--color-campo-fondo);
+    color: var(--color-texto-principal);
+    text-align: center;
+    transition: all 0.2s ease;
+}
+
+.icono-zona {
+    font-size: 28px;
+    color: var(--color-texto-secundario);
+    transition: color 0.2s ease;
+}
+
+.nombre-zona {
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+.tarjeta-zona:hover .contenido-tarjeta {
+    background: #e8f0fe;
+}
+
+.tarjeta-zona input[type="checkbox"]:checked + .contenido-tarjeta {
+    background: var(--color-superficie);
+    border-color: var(--color-primario);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.12);
+}
+
+.tarjeta-zona input[type="checkbox"]:checked + .contenido-tarjeta .icono-zona {
+    color: var(--color-primario);
+}
+
+.tarjeta-zona input[type="checkbox"]:checked + .contenido-tarjeta .nombre-zona {
+    font-weight: 600;
+    color: var(--color-primario);
+}
+
+/* Responsividad */
+@media (max-width: 650px) {
+    :host { padding: 15px; }
+    .encabezado { padding: 30px 25px 20px; }
+    .contenido { padding: 20px 25px 30px; }
+    h1 { font-size: 26px; }
+    .opciones-vivienda { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 400px) {
+    .tarjeta-vivienda { min-height: 105px; }
+}

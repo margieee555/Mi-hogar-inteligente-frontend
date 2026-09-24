@@ -53,7 +53,7 @@ export class LoginComponent {
     }).subscribe({
       next: () => {
         this.loading.set(false);
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/configuracion']); // <-- Tu nueva vista
       },
       error: (err: HttpErrorResponse) => {
         this.loading.set(false);
