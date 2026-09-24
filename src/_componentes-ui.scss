@@ -1,0 +1,474 @@
+/* -------------------------------------
+   Acciones Rápidas
+-------------------------------------- */
+.grid-acciones-rapidas {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+
+    @media (min-width: 768px) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.quick-card {
+    background: var(--color-superficie);
+    border: 1px solid var(--color-borde);
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+    }
+}
+
+.card-icon-wrapper {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+    background-color: var(--color-campo-fondo);
+}
+
+.card-action-btn {
+    width: 100%;
+    background-color: var(--color-campo-fondo);
+    color: var(--color-primario);
+    font-family: var(--fuente-principal);
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid var(--color-borde);
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    margin-top: auto;
+
+    &:hover {
+        background-color: var(--color-primario);
+        color: var(--color-sobre-primario);
+        border-color: var(--color-primario);
+    }
+}
+
+/* -------------------------------------
+   Calendario Compacto (Bento Grid)
+-------------------------------------- */
+.bento-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+
+    @media (min-width: 1024px) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+.bento-calendar {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.04);
+}
+
+.bento-events {
+    display: flex;
+    flex-direction: column;
+}
+
+.events-card {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.04);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.grid-cols-7 {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+
+.event-blue { background-color: #2563EB; }
+.event-green { background-color: #006e2f; }
+.event-orange { background-color: #996100; }
+.event-purple { background-color: #6d28d9; }
+
+.cal-day-empty {
+    min-height: 48px;
+    padding: 4px;
+}
+
+.cal-day {
+    min-height: 48px; 
+    padding: 6px;
+    border-radius: 8px;
+    border: 1px solid #f3f4f6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+    font-size: 0.8rem;
+    color: #374151;
+
+    &:hover {
+        background-color: #f9fafb;
+        border-color: #e5e7eb;
+    }
+
+    &.active-day {
+        border: 2px solid #2563eb;
+        background-color: rgba(37, 99, 235, 0.08);
+        color: #1e3a8a;
+    }
+}
+
+/* -------------------------------------
+   Ventanas Emergentes (Modales)
+-------------------------------------- */
+@keyframes modalEntrada {
+    from { transform: scale(0.95) translateY(10px); opacity: 0; }
+    to { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(11, 28, 48, 0.45);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 16px;
+    opacity: 1;
+    transition: opacity 0.2s ease-in-out;
+
+    &.hidden {
+        display: none !important;
+        opacity: 0;
+        pointer-events: none;
+    }
+}
+
+.modal-container {
+    background: #ffffff;
+    width: 100%;
+    max-width: 640px;
+    max-height: 90vh;
+    border-radius: 20px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    animation: modalEntrada 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal-header {
+    padding: 16px 24px;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .modal-title {
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: #0b1c30;
+    }
+
+    .btn-cerrar-modal {
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        color: #64748b;
+        border-radius: 50%;
+        padding: 4px;
+        display: flex;
+        align-items: center;
+        transition: background 0.2s, color 0.2s;
+
+        &:hover {
+            background: #f1f5f9;
+            color: #0b1c30;
+        }
+    }
+}
+
+.modal-body {
+    padding: 20px 24px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+/* Campos de formulario en modales */
+.grupo-campo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    .etiqueta-campo {
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: #475569;
+    }
+
+    .input-campo {
+        width: 100%;
+        background-color: #f8faff;
+        border: 1px solid #cbd5e1;
+        border-radius: 12px;
+        padding: 10px 14px;
+        font-size: 0.95rem;
+        color: #0b1c30;
+        outline: none;
+        transition: border-color 0.2s, box-shadow 0.2s;
+
+        &:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+        }
+    }
+}
+
+/* Selectores de Chips */
+.grilla-selector-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.chip-opcion {
+    input {
+        display: none;
+
+        &:checked + .chip-label {
+            background: #eff6ff;
+            border-color: #2563eb;
+            color: #2563eb;
+        }
+    }
+
+    .chip-label {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 12px;
+        background: #f1f5f9;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #475569;
+        cursor: pointer;
+        border: 1px solid transparent;
+        transition: all 0.2s ease;
+    }
+}
+
+.chip-prioridad {
+    padding: 8px 12px;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid #e2e8f0;
+    transition: all 0.2s;
+
+    &.active {
+        border-color: #2563eb;
+        background: #eff6ff;
+        color: #2563eb;
+    }
+}
+
+/* Elementos Modales Adicionales */
+.tarjeta-monto-modal {
+    background: #f8faff;
+    border: 1px solid #e2e8f0;
+    border-top: 4px solid #ef4444;
+    border-radius: 16px;
+    padding: 14px;
+    text-align: center;
+
+    .etiqueta-monto {
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: #64748b;
+        text-transform: uppercase;
+    }
+
+    .contenedor-monto-input {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 4px;
+
+        .simbolo-moneda {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #0b1c30;
+        }
+
+        .input-monto-modal {
+            font-size: 2rem;
+            font-weight: 700;
+            width: 150px;
+            background: transparent;
+            border: none;
+            text-align: center;
+            color: #0b1c30;
+            outline: none;
+        }
+    }
+}
+
+.grilla-categorias-gasto {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+
+    @media (min-width: 640px) {
+        grid-template-columns: repeat(6, 1fr);
+    }
+}
+
+.tarjeta-cat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 8px;
+    background: #f8faff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #475569;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &.activo {
+        border-color: #2563eb;
+        background: #eff6ff;
+        color: #2563eb;
+    }
+}
+
+.boton-adjuntar-modal {
+    width: 100%;
+    padding: 10px;
+    border: 1px dashed #cbd5e1;
+    border-radius: 10px;
+    background: transparent;
+    color: #2563eb;
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    cursor: pointer;
+}
+
+/* Modal Miembros */
+.avatar-grid-modal {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.avatar-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    background: #f1f5f9;
+    color: #64748b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &.selected {
+        border-color: #2563eb;
+        background: #eff6ff;
+        color: #2563eb;
+    }
+}
+
+.permission-card-modal {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+
+    &.active {
+        border-color: #2563eb;
+        background: #eff6ff;
+    }
+}
+
+/* Footer Modal */
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    padding-top: 10px;
+    border-top: 1px solid #f1f5f9;
+
+    .btn-cancelar {
+        padding: 10px 18px;
+        border-radius: 10px;
+        border: 1px solid #cbd5e1;
+        background: transparent;
+        font-weight: 600;
+        font-size: 0.9rem;
+        color: #64748b;
+        cursor: pointer;
+    }
+
+    .btn-confirmar {
+        padding: 10px 18px;
+        border-radius: 10px;
+        border: none;
+        background: #2563eb;
+        color: #ffffff;
+        font-weight: 600;
+        font-size: 0.9rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        transition: background 0.2s;
+
+        &:hover {
+            background: #1d4ed8;
+        }
+    }
+}

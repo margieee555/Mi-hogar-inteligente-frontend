@@ -1,0 +1,252 @@
+<div class="bg-background text-on-background min-h-screen flex flex-col pt-16 pb-24 md:pb-0">
+
+    <!-- Barra Superior -->
+    <header class="app-header">
+        <div class="flex items-center gap-sm">
+            <span class="material-symbols-outlined text-primary dark:text-primary-fixed icono-relleno">home_app_logo</span>
+            <span class="app-title font-bold text-lg">Mi Hogar 360</span>
+        </div>
+        <nav class="hidden md:flex items-center gap-lg">
+            <a class="nav-link active" href="#"><span class="material-symbols-outlined icono-relleno">home</span>Inicio</a>
+            <a class="nav-link" href="#"><span class="material-symbols-outlined">account_balance_wallet</span>Finanzas</a>
+            <a class="nav-link" href="#"><span class="material-symbols-outlined">shopping_cart</span>Compras</a>
+            <a class="nav-link" href="#"><span class="material-symbols-outlined">assignment</span>Tareas</a>
+            <a class="nav-link" href="#"><span class="material-symbols-outlined">inventory_2</span>Inventario</a>
+            <a class="nav-link" href="#"><span class="material-symbols-outlined">analytics</span>Estadísticas</a>
+        </nav>
+        <div class="flex items-center gap-2">
+            <button class="notification-btn" aria-label="Notificaciones">
+                <span class="material-symbols-outlined">notifications</span>
+            </button>
+            <button class="notification-btn" aria-label="Perfil de Usuario">
+                <span class="material-symbols-outlined">person</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Contenido Principal -->
+    <main class="flex-grow container mx-auto px-md py-lg max-w-container-max relative">
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold text-gray-900 tracking-tight">
+                ¡Bienvenido a Mi Hogar 360, Julian Esteban!
+            </h1>
+        </div>
+
+        <!-- SECCIÓN 1: Calendario y Eventos -->
+        <section class="mb-10">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-md gap-sm">
+                <h2 class="font-title-md text-[--color-texto-principal] font-semibold text-xl">Calendario del Hogar</h2>
+                <button (click)="sincronizarCalendario()" class="flex items-center gap-2 bg-white border border-gray-300 text-blue-600 px-4 py-2 rounded-xl hover:bg-gray-50 transition-colors shadow-sm font-semibold text-sm cursor-pointer">
+                    <span class="material-symbols-outlined text-lg">sync</span>
+                    Sincronizar Google Calendar
+                </button>
+            </div>
+
+            <div class="bento-grid">
+                <!-- Tarjeta de Calendario (Compacta) -->
+                <div class="bento-calendar">
+                    <div class="flex justify-between items-center mb-3">
+                        <h2 class="text-lg font-semibold text-gray-800">{{ mesActualStr }}</h2>
+                        <div class="flex gap-1">
+                            <button class="p-1 rounded-full hover:bg-gray-100 text-gray-600 cursor-pointer"><span class="material-symbols-outlined">chevron_left</span></button>
+                            <button class="p-1 rounded-full hover:bg-gray-100 text-gray-600 cursor-pointer"><span class="material-symbols-outlined">chevron_right</span></button>
+                        </div>
+                    </div>
+
+                    <!-- Leyenda Simplificada -->
+                    <div class="flex flex-wrap gap-3 mb-3 pb-3 border-b border-gray-200">
+                        <div class="flex items-center gap-1.5"><div class="w-2.5 h-2.5 rounded-full event-blue"></div><span class="text-xs text-gray-600">Pagos</span></div>
+                        <div class="flex items-center gap-1.5"><div class="w-2.5 h-2.5 rounded-full event-green"></div><span class="text-xs text-gray-600">Tareas</span></div>
+                        <div class="flex items-center gap-1.5"><div class="w-2.5 h-2.5 rounded-full event-orange"></div><span class="text-xs text-gray-600">Mantenimientos</span></div>
+                        <div class="flex items-center gap-1.5"><div class="w-2.5 h-2.5 rounded-full event-purple"></div><span class="text-xs text-gray-600">Familiar</span></div>
+                    </div>
+
+                    <!-- Grilla del Calendario -->
+                    <div class="grid-cols-7 text-center mb-1">
+                        <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">Lun</div>
+                        <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">Mar</div>
+                        <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">Mié</div>
+                        <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">Jue</div>
+                        <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">Vie</div>
+                        <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">Sáb</div>
+                        <div class="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">Dom</div>
+                    </div>
+
+                    <div class="grid-cols-7 gap-1">
+                        <div class="cal-day-empty"></div>
+                        <div class="cal-day" [class.active-day]="diaSeleccionado === '2026-09-12'" (click)="seleccionarDia('2026-09-12')">12</div>
+                        <div class="cal-day" [class.active-day]="diaSeleccionado === '2026-09-13'" (click)="seleccionarDia('2026-09-13')">
+                            <span class="font-bold">13</span>
+                            <div class="flex gap-0.5 mt-0.5"><div class="w-1.5 h-1.5 rounded-full event-green"></div><div class="w-1.5 h-1.5 rounded-full event-orange"></div></div>
+                        </div>
+                        <div class="cal-day" [class.active-day]="diaSeleccionado === '2026-09-14'" (click)="seleccionarDia('2026-09-14')">14</div>
+                    </div>
+                </div>
+
+                <!-- Lista de Eventos -->
+                <div class="bento-events">
+                    <div class="events-card">
+                        <div class="mb-3">
+                            <h3 class="font-title-md font-semibold text-gray-800">Eventos del Día</h3>
+                            <p class="text-xs text-gray-500">{{ diaActualStr }}</p>
+                        </div>
+                        <div class="flex-1 flex flex-col gap-2.5">
+                            <div class="p-2.5 rounded-xl bg-[#eff4ff] flex gap-3 items-start transition-shadow hover:shadow-sm">
+                                <div class="w-1 h-full rounded-full event-green self-stretch"></div>
+                                <div class="flex-1">
+                                    <div class="flex justify-between items-start mb-0.5">
+                                        <h4 class="text-sm font-semibold text-gray-800">Supermercado Quincenal</h4>
+                                        <span class="text-[9px] font-bold text-green-700 bg-green-100 px-1.5 py-0.5 rounded uppercase tracking-wider">Tareas</span>
+                                    </div>
+                                    <p class="text-xs text-gray-500 flex items-center gap-1">
+                                        <span class="material-symbols-outlined text-[14px]">schedule</span> 10:00 AM
+                                    </p>
+                                </div>
+                            </div>
+                            <button (click)="abrirModal('modal-tarea')" class="w-full mt-auto py-2.5 border-2 border-dashed border-gray-300 rounded-xl text-blue-600 font-semibold text-sm flex items-center justify-center gap-2 hover:bg-blue-50 transition-colors cursor-pointer">
+                                <span class="material-symbols-outlined text-lg">add_circle</span> Añadir Recordatorio
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: Recordatorio de Pagos -->
+        <section class="mb-10">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-4">
+                <h2 class="font-title-md text-[--color-texto-principal] font-semibold text-xl">Próximos Pagos</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div *ngFor="let servicio of serviciosPagos" 
+                     (click)="servicio.estado === 'pendiente' ? procesarPago(servicio.id) : null"
+                     [ngClass]="['bg-white border border-gray-100 border-l-4 rounded-2xl p-4 shadow-sm flex flex-col justify-between transition-all', 
+                                 servicio.colorBorde, 
+                                 servicio.estado === 'pendiente' ? 'cursor-pointer opacity-100 hover:shadow-md' : 'opacity-60 cursor-default']">
+                    
+                    <div class="flex justify-between items-start mb-3">
+                        <div class="flex items-center gap-2">
+                            <div [ngClass]="['w-8 h-8 rounded-full flex items-center justify-center', servicio.colorIcono]">
+                                <span class="material-symbols-outlined text-[16px]">{{ servicio.icono }}</span>
+                            </div>
+                            <h3 class="font-semibold text-gray-900 text-sm">{{ servicio.nombre }}</h3>
+                        </div>
+                        <span [ngClass]="['text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider', servicio.colorBadge]">
+                            {{ servicio.estado === 'pendiente' ? 'Pendiente' : 'Pagado' }}
+                        </span>
+                    </div>
+                    <div class="mt-2 flex justify-between items-end">
+                        <span class="text-xs text-gray-500 font-medium flex items-center gap-1">
+                            <span class="material-symbols-outlined text-[14px]">{{ servicio.estado === 'pendiente' ? 'event' : 'check_circle' }}</span> {{ servicio.fecha }}
+                        </span>
+                        <span [ngClass]="['text-lg font-bold text-gray-900', servicio.estado !== 'pendiente' ? 'line-through text-gray-400' : '']">
+                            ${{ servicio.monto | number:'1.2-2' }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3: Acciones Rápidas -->
+        <section class="mb-lg">
+            <h2 class="font-title-md text-[--color-texto-principal] mb-md font-semibold text-xl">Acciones Rápidas</h2>
+            <div class="grid-acciones-rapidas">
+                <article class="quick-card tarjeta-auth">
+                    <div class="card-icon-wrapper"><span class="material-symbols-outlined text-[--color-primario]">assignment</span></div>
+                    <h3 class="font-title-md mb-xs font-semibold">Añadir Tarea</h3>
+                    <p class="font-body-sm text-[--color-texto-secundario] flex-grow mb-md">Crea una lista de compras, asigna quehaceres o establece recordatorios.</p>
+                    <button class="card-action-btn" (click)="abrirModal('modal-tarea')">Crear Tarea</button>
+                </article>
+                <article class="quick-card tarjeta-auth">
+                    <div class="card-icon-wrapper"><span class="material-symbols-outlined text-[--color-primario]">account_balance_wallet</span></div>
+                    <h3 class="font-title-md mb-xs font-semibold">Registrar un Gasto</h3>
+                    <p class="font-body-sm text-[--color-texto-secundario] flex-grow mb-md">Mantén el control registrando recibos, compras y gastos compartidos.</p>
+                    <button class="card-action-btn" (click)="abrirModal('modal-gasto')">Nuevo Gasto</button>
+                </article>
+                <article class="quick-card tarjeta-auth">
+                    <div class="card-icon-wrapper"><span class="material-symbols-outlined text-[--color-primario]">person_add</span></div>
+                    <h3 class="font-title-md mb-xs font-semibold">Invitar a un Miembro</h3>
+                    <p class="font-body-sm text-[--color-texto-secundario] flex-grow mb-md">Mi Hogar 360 funciona mejor en equipo. Invita a tu familia a colaborar.</p>
+                    <button class="card-action-btn" (click)="abrirModal('modal-miembro')">Invitar</button>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <nav class="mobile-bottom-nav overflow-x-auto">
+        <a class="mobile-nav-item active flex-shrink-0" href="#"><span class="material-symbols-outlined icono-relleno">home</span><span>Inicio</span></a>
+        <a class="mobile-nav-item flex-shrink-0" href="#"><span class="material-symbols-outlined">account_balance_wallet</span><span>Finanzas</span></a>
+    </nav>
+</div>
+
+<!-- ========================================== -->
+<!-- VENTANAS EMERGENTES (MODALES INTEGRADOS)   -->
+<!-- ========================================== -->
+
+<!-- MODAL 1: NUEVA TAREA -->
+<div class="modal-overlay" [class.hidden]="modalActivo !== 'modal-tarea'">
+    <div class="modal-container">
+        <header class="modal-header">
+            <div class="flex items-center gap-2"><span class="material-symbols-outlined text-blue-600">assignment</span><h3 class="modal-title">Nueva Tarea</h3></div>
+            <button type="button" class="btn-cerrar-modal" (click)="cerrarModal()"><span class="material-symbols-outlined">close</span></button>
+        </header>
+        <form class="modal-body" (ngSubmit)="guardarTarea()">
+            <div class="grupo-campo">
+                <label class="etiqueta-campo">Nombre de la tarea</label>
+                <input class="input-campo" type="text" [(ngModel)]="nuevaTarea.nombre" name="nombreTarea" required>
+            </div>
+            <div class="grupo-campo">
+                <label class="etiqueta-campo">Categoría</label>
+                <div class="grilla-selector-chips">
+                    <label class="chip-opcion"><input type="radio" [(ngModel)]="nuevaTarea.categoria" name="categoria" value="limpieza"><span class="chip-label">Limpieza</span></label>
+                    <label class="chip-opcion"><input type="radio" [(ngModel)]="nuevaTarea.categoria" name="categoria" value="compras"><span class="chip-label">Compras</span></label>
+                </div>
+            </div>
+            <footer class="modal-footer">
+                <button type="button" class="btn-cancelar" (click)="cerrarModal()">Cancelar</button>
+                <button type="submit" class="btn-confirmar">Guardar Tarea</button>
+            </footer>
+        </form>
+    </div>
+</div>
+
+<!-- MODAL 2: REGISTRAR GASTO -->
+<div class="modal-overlay" [class.hidden]="modalActivo !== 'modal-gasto'">
+    <div class="modal-container">
+        <header class="modal-header">
+            <div class="flex items-center gap-2"><span class="material-symbols-outlined text-blue-600">account_balance_wallet</span><h3 class="modal-title">Registrar Gasto</h3></div>
+            <button type="button" class="btn-cerrar-modal" (click)="cerrarModal()"><span class="material-symbols-outlined">close</span></button>
+        </header>
+        <form class="modal-body" (ngSubmit)="guardarGasto()">
+            <div class="tarjeta-monto-modal">
+                <span class="etiqueta-monto">Monto Total</span>
+                <div class="contenedor-monto-input"><span class="simbolo-moneda">$</span><input class="input-monto-modal" type="number" [(ngModel)]="nuevoGasto.monto" name="montoGasto" required></div>
+            </div>
+            <footer class="modal-footer">
+                <button type="button" class="btn-cancelar" (click)="cerrarModal()">Cancelar</button>
+                <button type="submit" class="btn-confirmar">Guardar Gasto</button>
+            </footer>
+        </form>
+    </div>
+</div>
+
+<!-- MODAL 3: INVITAR MIEMBRO -->
+<div class="modal-overlay" [class.hidden]="modalActivo !== 'modal-miembro'">
+    <div class="modal-container">
+        <header class="modal-header">
+            <div class="flex items-center gap-2"><span class="material-symbols-outlined text-blue-600">person_add</span><h3 class="modal-title">Invitar Miembro</h3></div>
+            <button type="button" class="btn-cerrar-modal" (click)="cerrarModal()"><span class="material-symbols-outlined">close</span></button>
+        </header>
+        <form class="modal-body" (ngSubmit)="guardarMiembro()">
+            <div class="grupo-campo">
+                <label class="etiqueta-campo">Nombre del Residente</label>
+                <input class="input-campo" type="text" [(ngModel)]="nuevoMiembro.nombre" name="nombreMiembro" required>
+            </div>
+            <footer class="modal-footer">
+                <button type="button" class="btn-cancelar" (click)="cerrarModal()">Cancelar</button>
+                <button type="submit" class="btn-confirmar">Guardar Residente</button>
+            </footer>
+        </form>
+    </div>
+</div>

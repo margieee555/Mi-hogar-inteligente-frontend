@@ -1,13 +1,14 @@
 import { Routes } from '@angular/router';
 import { authGuard } from './core/guards/auth.guard';
-// 1. Agregamos la importación de tu nuevo componente
 import { ConfiguracionInicialComponent } from './features/auth/pages/configuracion-inicial/configuracion-inicial.component';
+// Ruta corregida apuntando a la carpeta "auth" donde lo creaste
+import { MenuPrincipalComponent } from './features/auth/pages/menu-principal/menu-principal.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'auth/welcome', pathMatch: 'full' },
 
-  // 2. Registramos tu ruta de forma pública y directa
   { path: 'configuracion', component: ConfiguracionInicialComponent },
+  { path: 'menu-principal', component: MenuPrincipalComponent },
 
   {
     path: 'auth',
@@ -22,6 +23,5 @@ export const routes: Routes = [
     loadComponent: () => import('./features/auth/pages/welcome/welcome.component').then(m => m.WelcomeComponent)
   },
 
-  // El comodín siempre debe ir de último
   { path: '**', redirectTo: 'auth/welcome' }
 ];

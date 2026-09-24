@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router'; // <-- 1. Importación agregada
 
 @Component({
   selector: 'app-configuracion-inicial',
   standalone: true,
-  imports: [CommonModule, FormsModule], // Importante para que funcionen los formularios
+  imports: [CommonModule, FormsModule],
   templateUrl: './configuracion-inicial.component.html',
-  styleUrl: './configuracion-inicial.component.scss' // Asegúrate de que termine en .scss
+  styleUrl: './configuracion-inicial.component.scss'
 })
 export class ConfiguracionInicialComponent {
   // Variables de estado del componente
@@ -22,8 +23,8 @@ export class ConfiguracionInicialComponent {
     tipoVivienda: 'Casa',
     numeroResidentes: 1,
     direccionHogar: '',
-    invitados: [''], // Iniciamos con un campo vacío para el primer invitado
-    zonas: ['Sala de estar', 'Habitación principal'] // Seleccionadas por defecto
+    invitados: [''], 
+    zonas: ['Sala de estar', 'Habitación principal'] 
   };
 
   // Mensajes de error
@@ -42,6 +43,9 @@ export class ConfiguracionInicialComponent {
     { nombre: 'Jardín / Patio', icono: 'yard' },
     { nombre: 'Garaje', icono: 'garage' }
   ];
+
+  // <-- 2. Constructor agregado para habilitar la navegación
+  constructor(private router: Router) {} 
 
   // Métodos del Paso 1
   seleccionarVivienda(tipo: string) {
@@ -78,7 +82,6 @@ export class ConfiguracionInicialComponent {
     this.datosHogar.invitados.splice(index, 1);
   }
 
-  // Función para optimizar el renderizado del ngFor en inputs
   trackByIndex(index: number, obj: any): any {
     return index;
   }
@@ -87,7 +90,6 @@ export class ConfiguracionInicialComponent {
     this.mensajeInvitados = '';
     const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     
-    // Filtramos los correos vacíos
     const correosValidos = this.datosHogar.invitados.filter(c => c.trim() !== '');
     
     if (correosValidos.length > 0 && correosValidos.some(c => !regexEmail.test(c))) {
@@ -125,8 +127,7 @@ export class ConfiguracionInicialComponent {
     // Simulación de guardado exitoso y redirección
     setTimeout(() => {
       this.cargando = false;
-      alert('Configuración guardada. ¡Bienvenido a hogar360!');
-      // Aquí más adelante conectarás tu Router para enviarlo al dashboard
+      this.router.navigate(['/menu-principal']);
     }, 1500);
   }
 
