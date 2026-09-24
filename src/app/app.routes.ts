@@ -4,8 +4,9 @@ import { ConfiguracionInicialComponent } from './features/auth/pages/configuraci
 import { MenuPrincipalComponent } from './features/auth/pages/menu-principal/menu-principal.component';
 import { FinanzasComponent } from './features/auth/pages/finanzas/finanzas.component';
 import { InventarioComponent } from './features/auth/pages/inventario/inventario.component';
-// Importación del nuevo componente de Compras
 import { ComprasComponent } from './features/auth/pages/compras/compras.component';
+// Importación del nuevo componente de Tareas
+import { TareasComponent } from './features/auth/pages/tareas/tareas.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'auth/welcome', pathMatch: 'full' },
@@ -14,9 +15,10 @@ export const routes: Routes = [
   { path: 'menu-principal', component: MenuPrincipalComponent },
   { path: 'finanzas', component: FinanzasComponent },
   { path: 'inventario', component: InventarioComponent },
-  
-  // Nueva ruta de compras registrada
   { path: 'compras', component: ComprasComponent },
+  
+  // Nueva ruta de Tareas registrada
+  { path: 'tareas', component: TareasComponent },
 
   {
     path: 'auth',
