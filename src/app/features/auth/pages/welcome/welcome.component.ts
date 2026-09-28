@@ -1,14 +1,11 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
-/**
- * Pantalla de bienvenida (landing) de Hogar360.
- * Basada en el diseño original provisto (Tailwind + Material Symbols).
- */
 @Component({
   selector: 'app-welcome',
   standalone: true,
-  imports: [RouterLink],
+  imports: [CommonModule, RouterLink],
   templateUrl: './welcome.component.html',
   styleUrl: './welcome.component.scss'
 })

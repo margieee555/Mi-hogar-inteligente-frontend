@@ -7,12 +7,12 @@
             <span class="app-title font-bold text-lg">Mi Hogar 360</span>
         </div>
         <nav class="hidden md:flex items-center gap-lg">
-            <a class="nav-link active" href="/menu-principal"><span class="material-symbols-outlined icono-relleno">home</span>Inicio</a>
-            <a class="nav-link" href="/finanzas"><span class="material-symbols-outlined">account_balance_wallet</span>Finanzas</a>
-            <a class="nav-link" href="/compras"><span class="material-symbols-outlined">shopping_cart</span>Compras</a>
-            <a class="nav-link" href="/tareas"><span class="material-symbols-outlined">assignment</span>Tareas</a>
-            <a class="nav-link" href="/inventario"><span class="material-symbols-outlined">inventory_2</span>Inventario</a>
-            <a class="nav-link" href="/estadisticas"><span class="material-symbols-outlined">analytics</span>Estadísticas</a>
+            <a class="nav-link" routerLink="/menu-principal" routerLinkActive="active"><span class="material-symbols-outlined icono-relleno">home</span>Inicio</a>
+            <a class="nav-link" routerLink="/finanzas" routerLinkActive="active"><span class="material-symbols-outlined">account_balance_wallet</span>Finanzas</a>
+            <a class="nav-link" routerLink="/compras" routerLinkActive="active"><span class="material-symbols-outlined">shopping_cart</span>Compras</a>
+            <a class="nav-link" routerLink="/tareas" routerLinkActive="active"><span class="material-symbols-outlined">assignment</span>Tareas</a>
+            <a class="nav-link" routerLink="/inventario" routerLinkActive="active"><span class="material-symbols-outlined">inventory_2</span>Inventario</a>
+            <a class="nav-link" routerLink="/estadisticas" routerLinkActive="active"><span class="material-symbols-outlined">analytics</span>Estadísticas</a>
         </nav>
         <div class="flex items-center gap-2">
             <button class="notification-btn" aria-label="Notificaciones">
@@ -113,14 +113,14 @@
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-4">
                 <h2 class="font-title-md text-[--color-texto-principal] font-semibold text-xl">Próximos Pagos</h2>
             </div>
-            
+
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <div *ngFor="let servicio of serviciosPagos" 
+                <div *ngFor="let servicio of serviciosPagos"
                      (click)="servicio.estado === 'pendiente' ? procesarPago(servicio.id) : null"
-                     [ngClass]="['bg-white border border-gray-100 border-l-4 rounded-2xl p-4 shadow-sm flex flex-col justify-between transition-all', 
-                                 servicio.colorBorde, 
+                     [ngClass]="['bg-white border border-gray-100 border-l-4 rounded-2xl p-4 shadow-sm flex flex-col justify-between transition-all',
+                                 servicio.colorBorde,
                                  servicio.estado === 'pendiente' ? 'cursor-pointer opacity-100 hover:shadow-md' : 'opacity-60 cursor-default']">
-                    
+
                     <div class="flex justify-between items-start mb-3">
                         <div class="flex items-center gap-2">
                             <div [ngClass]="['w-8 h-8 rounded-full flex items-center justify-center', servicio.colorIcono]">
@@ -171,12 +171,12 @@
     </main>
 
     <nav class="mobile-bottom-nav overflow-x-auto no-scrollbar">
-        <a class="mobile-nav-item active flex-shrink-0" href="/menu-principal"><span class="material-symbols-outlined icono-relleno">home</span><span>Inicio</span></a>
-        <a class="mobile-nav-item flex-shrink-0" href="/finanzas"><span class="material-symbols-outlined">account_balance_wallet</span><span>Finanzas</span></a>
-        <a class="mobile-nav-item flex-shrink-0" href="/compras"><span class="material-symbols-outlined">shopping_cart</span><span>Compras</span></a>
-        <a class="mobile-nav-item flex-shrink-0" href="/tareas"><span class="material-symbols-outlined">assignment</span><span>Tareas</span></a>
-        <a class="mobile-nav-item flex-shrink-0" href="/inventario"><span class="material-symbols-outlined">inventory_2</span><span>Inventario</span></a>
-        <a class="mobile-nav-item flex-shrink-0" href="/estadisticas"><span class="material-symbols-outlined">analytics</span><span>Estad.</span></a>
+        <a class="mobile-nav-item flex-shrink-0" routerLink="/menu-principal" routerLinkActive="active"><span class="material-symbols-outlined icono-relleno">home</span><span>Inicio</span></a>
+        <a class="mobile-nav-item flex-shrink-0" routerLink="/finanzas" routerLinkActive="active"><span class="material-symbols-outlined">account_balance_wallet</span><span>Finanzas</span></a>
+        <a class="mobile-nav-item flex-shrink-0" routerLink="/compras" routerLinkActive="active"><span class="material-symbols-outlined">shopping_cart</span><span>Compras</span></a>
+        <a class="mobile-nav-item flex-shrink-0" routerLink="/tareas" routerLinkActive="active"><span class="material-symbols-outlined">assignment</span><span>Tareas</span></a>
+        <a class="mobile-nav-item flex-shrink-0" routerLink="/inventario" routerLinkActive="active"><span class="material-symbols-outlined">inventory_2</span><span>Inventario</span></a>
+        <a class="mobile-nav-item flex-shrink-0" routerLink="/estadisticas" routerLinkActive="active"><span class="material-symbols-outlined">analytics</span><span>Estad.</span></a>
         <a class="mobile-nav-item flex-shrink-0 cursor-pointer" (click)="irAlPerfil()"><span class="material-symbols-outlined">person</span><span>Perfil</span></a>
     </nav>
 </div>

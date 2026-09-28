@@ -1,10 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { Component, signal } from '@angular/core';
+import { Component, signal, AfterViewInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AuthService } from '../../services/auth.service';
 import { passwordMatchValidator } from '../../../../shared/validators/password-match.validator';
+import { environment } from '../../../../../environments/environment';
+
+declare const google: any;
 
 @Component({
   selector: 'app-register',
@@ -13,7 +16,7 @@ import { passwordMatchValidator } from '../../../../shared/validators/password-m
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
-export class RegisterComponent {
+export class RegisterComponent implements AfterViewInit {
 
   showPassword = signal(false);
   loading = signal(false);
@@ -33,6 +36,24 @@ export class RegisterComponent {
       confirmPassword: ['', [Validators.required]]
     }, {
       validators: passwordMatchValidator('password', 'confirmPassword')
+    });
+  }
+
+  ngAfterViewInit(): void {
+    google.accounts.id.initialize({
+      client_id: environment.googleClientId,
+      callback: (response: any) => this.handleGoogleCredential(response)
+    });
+    google.accounts.id.renderButton(
+      document.getElementById('google-signin-button'),
+      { theme: 'outline', size: 'large', width: 300 }
+    );
+  }
+
+  private handleGoogleCredential(response: any): void {
+    this.authService.loginWithGoogle(response.credential).subscribe({
+      next: () => this.router.navigate(['/menu-principal']),
+      error: () => this.errorMessage.set('No se pudo registrar con Google')
     });
   }
 

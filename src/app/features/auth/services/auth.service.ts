@@ -39,6 +39,11 @@ export class AuthService {
     this.tokenStorage.clear();
     this.router.navigate(['/auth/welcome']);
   }
+  loginWithGoogle(idToken: string): Observable<AuthResponse> {
+    return this.http.post<AuthResponse>(`${this.baseUrl}/google`, { idToken }).pipe(
+      tap(response => this.persistSession(response))
+  );
+}
 
   private persistSession(response: AuthResponse): void {
     this.tokenStorage.saveToken(response.token);

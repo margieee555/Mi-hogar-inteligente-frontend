@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-menu-principal',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterLink, RouterLinkActive],
   templateUrl: './menu-principal.component.html',
   styleUrl: './menu-principal.component.scss'
 })
@@ -42,7 +42,7 @@ export class MenuPrincipalComponent implements OnInit {
     const today = new Date();
     const optionsMonth: Intl.DateTimeFormatOptions = { month: 'long', year: 'numeric' };
     const optionsDay: Intl.DateTimeFormatOptions = { weekday: 'long', day: 'numeric', month: 'long' };
-    
+
     let monthStr = today.toLocaleDateString('es-ES', optionsMonth);
     this.mesActualStr = monthStr.charAt(0).toUpperCase() + monthStr.slice(1);
 

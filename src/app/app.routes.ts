@@ -1,14 +1,14 @@
 import { Routes } from '@angular/router';
 import { authGuard } from './core/guards/auth.guard';
-import { ConfiguracionInicialComponent } from './features/auth/pages/configuracion-inicial/configuracion-inicial.component';
-import { MenuPrincipalComponent } from './features/auth/pages/menu-principal/menu-principal.component';
-import { FinanzasComponent } from './features/auth/pages/finanzas/finanzas.component';
-import { InventarioComponent } from './features/auth/pages/inventario/inventario.component';
-import { ComprasComponent } from './features/auth/pages/compras/compras.component';
-import { TareasComponent } from './features/auth/pages/tareas/tareas.component';
-import { PerfilComponent } from './features/auth/pages/perfil/perfil.component';
+import { ConfiguracionInicialComponent } from './features/configuracion-inicial/pages/configuracion-inicial/configuracion-inicial.component';
+import { MenuPrincipalComponent } from './features/menu-principal/pages/menu-principal/menu-principal.component';
+import { FinanzasComponent } from './features/finanzas/pages/finanzas/finanzas.component';
+import { InventarioComponent } from './features/inventario/pages/inventario/inventario.component';
+import { ComprasComponent } from './features/compras/pages/compras/compras.component';
+import { TareasComponent } from './features/tareas/pages/tareas/tareas.component';
+import { PerfilComponent } from './features/perfil/pages/perfil/perfil.component';
 // Importación del nuevo componente de Estadísticas
-import { EstadisticasComponent } from './features/auth/pages/estadisticas/estadisticas.component';
+import { EstadisticasComponent } from './features/estadisticas/pages/estadisticas/estadisticas.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'auth/welcome', pathMatch: 'full' },
